@@ -1,4 +1,4 @@
-import { Controller,Get,Post,Body, Param, Delete,Patch } from '@nestjs/common';
+import { Controller,Get,Post,Body, Param, Delete,Patch, UsePipes, ValidationPipe } from '@nestjs/common';
 import { Board, BoardStatus } from './board.model';
 import { BoardsService } from './boards.service';
 import { CreateBoardDto } from './dto/create-board.dto';
@@ -18,6 +18,7 @@ export class BoardsController {
     }
 
     @Post()
+    @UsePipes(ValidationPipe)
     createBoard(@Body() CreateBoardDto: CreateBoardDto): Board {
         return this.boardsService.createBoard(CreateBoardDto);
     }
